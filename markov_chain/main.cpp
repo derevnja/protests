@@ -35,9 +35,6 @@ unsigned int randomNum(unsigned int maxRangeVal)
     std::mt19937 mt(rd());
     std::uniform_int_distribution<unsigned int> dist(0, maxRangeVal);
     unsigned int val = dist(mt);
-//    cout << endl<< "============";
-//    cout << maxRangeVal << "         " << val;
-//    cout << endl << "============";
 
     return val;
 }
@@ -121,33 +118,53 @@ string getRandomWord(const map<string,double>& wordsTable)
         fill_n(back_inserter(words),PrecCoeff*iter.second,iter.first);
         if (words.empty())
             cout << "Cannot generate new word!";
-        //int one = randomNum(words.size());
-        //int two = words.size();
         return words[words.size() -1];
     }
+}
+
+void clearAllStructs()
+{
+    Freq.clear();
+    Prob.clear();
+    ccount.clear();
+    key.clear();
 }
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     setlocale(LC_CTYPE, "rus");
-    analize("../data/test.txt");
+    ///init value for generated text
+    int N = 10;
 
-    ///generate randomly start element
-    auto start = Prob.begin();
-    advance(start, randomNum(Prob.size()));
-    list<string> CurKey = start->first;
-    copy(CurKey.begin(),CurKey.end(),ostream_iterator<string>(cout, " "));
-
-    cout << endl;
-
-    int N = 200;
-    for(unsigned int i=0;i<N;i++)
+    while(true)
     {
-        string temp = getRandomWord(Prob[CurKey]);
-        CurKey.push_back(temp);;
-        CurKey.pop_front();
-        cout << temp << " ";
+        cout << "enter key length" << endl;
+        cin >> K;
+        cout << "enter length of text to be generated" << endl;
+        cin >> N;
+
+        clearAllStructs();
+        analize("../data/test.txt");
+
+        ///generate randomly start element
+        auto start = Prob.begin();
+        advance(start, randomNum(Prob.size()));
+        list<string> CurKey;
+        CurKey.clear();
+        CurKey= start->first;
+        copy(CurKey.begin(),CurKey.end(),ostream_iterator<string>(cout, " "));
+        cout << endl;
+
+        for(unsigned int i=0;i<N;i++)
+        {
+            string temp = getRandomWord(Prob[CurKey]);
+            CurKey.push_back(temp);;
+            CurKey.pop_front();
+            cout << temp << " ";
+        }
+
+        cout << endl<< endl<< endl;
     }
 
     return a.exec();
