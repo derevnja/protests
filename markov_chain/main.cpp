@@ -104,7 +104,7 @@ void analize(const char *filename)
     {
         for(auto iter_phrase : iter_freq.second)
         {
-            Prob[iter_freq.first][iter_phrase.first] = iter_phrase.second / double(ccount[iter_freq.first]);
+            Prob[iter_freq.first][iter_phrase.first] = (iter_phrase.second + 1/2)/ double(ccount[iter_freq.first] + 500000);
             //cout << Prob[iter_freq.first][iter_phrase.first] << endl;
         }
     }
@@ -130,12 +130,29 @@ void clearAllStructs()
     key.clear();
 }
 
+void makePrintToFile()
+{
+    ///config output into file
+    std::ofstream out("out.txt");
+    std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
+    std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
+}
+
+
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     setlocale(LC_CTYPE, "rus");
     ///init value for generated text
     int N = 10;
+    ///make file reading much faster
+    //std::ios_base::sync_with_stdio(false);
+
+    ///config output into file
+//    std::ofstream out("out.txt");
+//    std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
+//    std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
     while(true)
     {
