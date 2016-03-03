@@ -3,9 +3,11 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
+class QCustomPlot;
+
+//namespace Ui {
+//class MainWindow;
+//}
 
 class MainWindow : public QMainWindow
 {
@@ -16,7 +18,6 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H
