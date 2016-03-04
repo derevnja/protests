@@ -10,7 +10,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = plot-test
 TEMPLATE = app
+INCLUDEPATH += d:/topka/plot_test
 
+#this stuff is shit!!!
+#win32 {
+#    win32-msvc:LIBS += d:/topka/plot_test/ easy_profiler
+#    #LIBS += d:/topka/plot_test/easy_profiler.lib
+#}
+#    #win32-msvc:LIBS += d:/topka/plot_test/easy_profiler.lib
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -19,4 +26,5 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     qcustomplot.h \
-    plotwidget.h
+    plotwidget.h \
+    profiler.h

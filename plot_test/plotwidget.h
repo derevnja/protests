@@ -24,6 +24,7 @@ private:
     void setupBarChart(QCustomPlot *customPlot);
     ///set data to visualize on bars
     void setData(QCPBars *_bar,QCPAxis *_xAxis);
+    void readFileData();
 };
 
 #endif // PLOTWIDGET_H
